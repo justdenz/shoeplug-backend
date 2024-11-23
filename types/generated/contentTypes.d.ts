@@ -519,12 +519,13 @@ export interface ApiBrandBrand extends Struct.CollectionTypeSchema {
     singularName: 'brand';
     pluralName: 'brands';
     displayName: 'Brand';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    BrandName: Schema.Attribute.String &
+    brand_name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     shoes: Schema.Attribute.Relation<'oneToMany', 'api::shoe.shoe'>;
@@ -580,12 +581,15 @@ export interface ApiShoeShoe extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    Model: Schema.Attribute.String & Schema.Attribute.Required;
+    model: Schema.Attribute.String & Schema.Attribute.Required;
     brand: Schema.Attribute.Relation<'manyToOne', 'api::brand.brand'>;
-    Stock: Schema.Attribute.Integer & Schema.Attribute.Required;
-    Colorway: Schema.Attribute.String & Schema.Attribute.Required;
+    stock: Schema.Attribute.Integer & Schema.Attribute.Required;
+    colorway: Schema.Attribute.String & Schema.Attribute.Required;
     image_url: Schema.Attribute.String & Schema.Attribute.Required;
-    Price: Schema.Attribute.Decimal;
+    price: Schema.Attribute.Decimal;
+    is_used: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
